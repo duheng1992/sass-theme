@@ -1,0 +1,97 @@
+$fui-colors: (
+  primary: (
+    menu-hover:  #023767,
+    menu-active: #012F5A,
+    hover:       #0F8BFF,
+    normal:      #007CF0,
+    active:      #0069CC,
+  ),
+  secondary: (
+    menu-hover:  #005661,
+    menu-active: #004048,
+    hover:       #04CBE1,
+    normal:      #00B8CC,
+    active:      #00A6B8,
+  ),
+  fill: (
+    light:   #292929,
+    normal:  #242424,
+    heavy:   #1F1F1F,
+    weighty: #1A1A1A,
+  ),
+  background: (
+    light:   #141414,
+    normal:  #0F0F0F,
+    weighty: #050505,
+  ),
+  line: (
+    light:   #333333,
+    normal:  #3D3D3D,
+    heavy:   #0F0F0F,
+    weighty: #050505,
+  ),
+  text: (
+    disabled: #4A4A4A,
+    minor:    #707070,
+    assist:   #8A8A8A,
+    secondary:#BDBDBD,
+    main:     #D6D6D6,
+  ),
+  icon: (
+    disabled:  #4A4A4A,
+    assist:    #707070,
+    secondary: #8A8A8A,
+    main:      #BDBDBD,
+  ),
+  nav: (
+    background: #333333,
+    product:    #0F0F0F,
+  ),
+  reverse: (
+    default: #FFFFFF,
+  ),
+  green: (
+    1: #0B4427,
+    2: #064E2A,
+    3: #05713B,
+    4: #088044,
+    5: #048F4A,
+  ),
+  red: (
+    1: #570A0A,
+    2: #6E0A0A,
+    3: #AD1D1D,
+    4: #C52B2B,
+    5: #E03131,
+  ),
+  blue: (
+    1: #042C7F,
+    2: #093590,
+    3: #195ADB,
+    4: #286BF2,
+    5: #387AFF,
+  ),
+  orange: (
+    1: #4A2B06,
+    2: #613501,
+    3: #794100,
+    4: #975100,
+    5: #A85A00,
+  ),
+  yellow: (
+    1: #4A3902,
+    2: #5B4700,
+    3: #947100,
+    4: #AA8200,
+    5: #BD9102,
+  ),
+  purple: (
+    1: #2D1E76,
+    2: #36219B,
+    3: #5D3FF7,
+    4: #6B4EFF,
+    5: #7358FD,
+  ),
+);
+
+@import '../theme-builder';

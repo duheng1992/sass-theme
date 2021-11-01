@@ -1,0 +1,106 @@
+@mixin input-radius-box()
+  line-height: $input-line-height
+  padding: 6px 12px
+  background-color: $bg-body
+  border-radius: 2px
+  border: 1px solid $input-border-color
+  font-size: $input-base-size
+  color: $text-default
+  -webkit-appearance: none
+
+  &:focus
+    border: 1px solid $input-checked-color
+    outline: none
+
+@mixin clearfix()
+  &::after
+    display: block
+    clear: both
+    content: ""
+
+@mixin flex-align($vertical: center, $horizontal: center)
+  display: flex
+  align-items: $vertical
+  justify-content: $horizontal
+
+@mixin flex-xy-center
+  @include flex-align()
+
+@mixin flex-y-center
+  @include flex-align(center, flex-end)
+
+@mixin text-overflow($text-overflow: ellipsis)
+  text-overflow: $text-overflow
+  white-space: nowrap
+  overflow: hidden
+
+@mixin text-ellipsis()
+  @include text-overflow()
+
+@mixin absolute-center
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+
+@mixin text-mute
+  color: $text-mute
+
+@mixin fui-card
+  display: block
+  background: $bg-body
+  border-radius: 0.25rem
+  box-shadow: 0 0.2rem 0.25rem rgba(0, 0, 0, 0.1)
+
+  &:not(:last-child)
+    margin-right: 1rem
+
+@mixin multi-line-ellipsis($lineHeight: 1rem, $lineCount: 1, $bgColor: white)
+  overflow: hidden
+  position: relative
+  line-height: $lineHeight
+  max-height: $lineHeight * $lineCount
+  text-align: justify
+  margin-right: -0.5rem
+  padding-right: 0.5rem
+
+  &:before
+    content: '...'
+    position: absolute
+    right: 0
+    bottom: 0
+
+  &:after
+    content: ''
+    position: absolute
+    right: 0
+    width: 1rem
+    height: 1rem
+    margin-top: 0.2rem
+    background: $bgColor
+
+@mixin main-container()
+  flex-shrink: 0
+  background-color: $bg-body
+  border-radius: .25rem
+  box-shadow: 0 4px 10px #ccc
+
+@mixin pagination-container()
+  @include main-container
+  display: flex
+  justify-content: space-between
+  flex-direction: column
+
+@mixin icon-ripple-btn($backgroundColor: $silver)
+  &:after
+    content: ''
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background: $backgroundColor
+    opacity: 0
+    border-radius: 50%
+    transform: scale(1, 1) translate(-50%)
+    transform-origin: 50% 50%

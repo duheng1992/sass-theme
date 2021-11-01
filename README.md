@@ -1,70 +1,95 @@
-# Getting Started with Create React App
+# 颜色主题 1.0
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+支持定制产品的颜色主题，能够静态（编译）或动态（使用时）地切换主题。
 
-## Available Scripts
+## 实现方式
 
-In the project directory, you can run:
+颜色主题2.0将css变量作为主要实现方式，在牺牲了部分兼容性的（伪）需求之后，极大简化了动态主题切换中样式的维护成本。
 
-### `yarn start`
+### 颜色定义和颜色变量的生成
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+定义颜色映射如下：
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```scss
+$fui-colors: (
+  primary: (
+    menu-hover:  #F0F8FF,
+    menu-active: #E6F3FF,
+    hover:       #35A9FF,
+    normal:      #1D96F3,
+    active:      #1575CF,
+  ),
+  secondary: (
+    menu-hover:  #EEFBFC,
+    menu-active: #DEF7FA,
+    hover:       #2ACFE2,
+    normal:      #17C1D4,
+    active:      #0BA1B3,
+  ),
+);
+```
 
-### `yarn test`
+该颜色map的编译产出为颜色变量css文件：
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```css
+:root {
+  --fui-primary-color-menu-hover: #F0F8FF;
+  --fui-primary-color-menu-active: #E6F3FF;
+  --fui-primary-color-hover: #35A9FF;
+  --fui-primary-color-normal: #1D96F3;
+  --fui-primary-color-active: #1575CF;
+  --fui-secondary-color-menu-hover: #EEFBFC;
+  --fui-secondary-color-menu-active: #DEF7FA;
+  --fui-secondary-color-hover: #2ACFE2;
+  --fui-secondary-color-normal: #17C1D4;
+  --fui-secondary-color-active: #0BA1B3;
+}
+```
 
-### `yarn build`
+如果要添加一种新的颜色主题，只需要添加一个新的颜色映射文件即可。
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 颜色变量的引用
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+通过工具函数引用颜色变量：
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```scss
+@function fui-color($color-type, $color-name) {
+  @return var(--fui-#{$color-type}-color-#{$color-name})
+}
 
-### `yarn eject`
+$brand-primary: fui-color(primary, normal);
+```
+等价于：
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```scss
+$brand-primary: var(--fui-primary-color-normal);
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+所有可用颜色变量见[Color](/color)页面。
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## 使用方法
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+使用flash-ui 0.11.0 及之后的版本即可使用颜色主题2.0的功能。
 
-## Learn More
+### 引用升级
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+需要注意的是，当升级组件库后，需要引用一种颜色主题的css变量文件作为默认主题，完整的引入如下：
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```scss
+@import '~flash-ui/styles/theme.css';
+@import '~flash-ui/styles/themes/white.css';
+```
 
-### Code Splitting
+### 主题切换
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+主题切换的方法即为在页面的style部分添加要切换主题的css变量文件，如下：
 
-### Analyzing the Bundle Size
+``` html
+<link rel="stylesheet" class="style-manager-theme" href="assets/themes/black.css">
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+需要注意，在打包时需要把flash-ui中的css变量文件也一同打包到项目的静态资源中，比如assets/themes文件夹下，建议添加脚本自动化这个流程。
 
-### Making a Progressive Web App
+### 主题固化
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+为使主题在页面刷新之后保持不变，建议将已切换的主题存储在localStorage中，并在页面初始化的时候读取这个值，然后初始化主题。
