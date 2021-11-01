@@ -4,7 +4,7 @@
 
 ## 实现方式
 
-颜色主题2.0将css变量作为主要实现方式，在牺牲了部分兼容性的（伪）需求之后，极大简化了动态主题切换中样式的维护成本。
+颜色主题1.0将css变量作为主要实现方式，在牺牲了部分兼容性的（伪）需求之后，极大简化了动态主题切换中样式的维护成本。
 
 ### 颜色定义和颜色变量的生成
 
@@ -59,32 +59,20 @@ $fui-colors: (
 
 $brand-primary: fui-color(primary, normal);
 ```
+
 等价于：
 
 ```scss
 $brand-primary: var(--fui-primary-color-normal);
 ```
 
-所有可用颜色变量见[Color](/color)页面。
-
-## 使用方法
-
-使用flash-ui 0.11.0 及之后的版本即可使用颜色主题2.0的功能。
-
-### 引用升级
-
-需要注意的是，当升级组件库后，需要引用一种颜色主题的css变量文件作为默认主题，完整的引入如下：
-
-```scss
-@import '~flash-ui/styles/theme.css';
-@import '~flash-ui/styles/themes/white.css';
-```
+所有可用颜色变量见代码 /src/styles/themes。
 
 ### 主题切换
 
 主题切换的方法即为在页面的style部分添加要切换主题的css变量文件，如下：
 
-``` html
+```html
 <link rel="stylesheet" class="style-manager-theme" href="assets/themes/black.css">
 ```
 
