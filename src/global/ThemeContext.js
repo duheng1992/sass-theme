@@ -39,8 +39,26 @@ const getStoredThemeKey = () => {
   }
 }
 
-const defaultTheme = getStoredThemeKey() || 'white';
+export const ThemeContext = React.createContext();
 
-const ThemeContext = React.createContext(defaultTheme);
+export default function ThemeContextProvider({ children }) {
+  const [theme, setTheme] = React.useState(getStoredThemeKey() || 'white');
 
-export { defaultTheme, setStyle, removeStyle, storeTheme, getStoredThemeKey, ThemeContext }
+  const defaultTheme = {
+    theme,
+    setTheme,
+  };
+
+  React.useEffect(() => {
+    removeStyle();
+    setStyle('theme', theme);
+    storeTheme(theme);
+    return () => {}
+  }, [theme])
+
+  return (
+    <ThemeContext.Provider value={defaultTheme}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};
