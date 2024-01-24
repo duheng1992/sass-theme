@@ -13,12 +13,14 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-app-rewired start",
     "theme": "node scripts/buildThemes.js",
     "prestart": "npm run theme",
+    "start": "react-app-rewired start",
+    "prebuild": "npm run theme",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
-    "eject": "react-app-rewired eject"
+    "eject": "react-app-rewired eject",
+    "deploy": "yarn build && gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -41,6 +43,7 @@
   "devDependencies": {
     "chalk": "^2.4.2",
     "customize-cra": "^1.0.0",
+    "gh-pages": "^6.1.1",
     "react-app-rewired": "^2.2.1",
     "sass": "^1.43.4",
     "shelljs": "^0.7.8"
