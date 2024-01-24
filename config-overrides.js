@@ -5,10 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = override(
   (config, env) => {
     if (env === "production") {
-      config.output.publicPath = path.resolve(
-        __dirname,
-        "./sass-theme"
-      );
+      config.output.publicPath = 'sass-theme/'
     }
     return config;
   },

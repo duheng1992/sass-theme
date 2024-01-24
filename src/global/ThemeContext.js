@@ -15,7 +15,7 @@ const getExistingLinkElementByKey = (key) => document.head.querySelector(`link[r
 const getLinkElementForKey = (key) => getExistingLinkElementByKey(key) || createLinkElementWithKey(key);
 
 const setStyle = (key = 'theme', path = 'white') => {
-  getLinkElementForKey(key).setAttribute('href', `assets/themes/${path}.css`);
+  getLinkElementForKey(key).setAttribute('href', `sass-theme/assets/themes/${path}.css`);
 }
 
 const removeStyle = (key = 'theme') => {
